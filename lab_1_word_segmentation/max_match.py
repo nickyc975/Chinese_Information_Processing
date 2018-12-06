@@ -4,14 +4,13 @@ import sys
 
 
 def max_match_segment(line, dic):
-    base = 0
     words = []
+    base, rear = 0, len(line)
     while base < len(line):
-        rear = base + 1
-        for pos in range(base + 1, len(line)):
-            word = line[base:pos]
+        for rear in range(len(line), base, -1):
+            word = line[base:rear]
             if word in dic:
-                rear = pos
+                break
         words.append(line[base:rear])
         base = rear
     return words
@@ -33,5 +32,5 @@ if __name__=="__main__":
 
     with open(sys.argv[3], "w", encoding="utf8") as f:
         for line in fpi:
-            f.write("\t".join(max_match_segment(line.strip(), dic)) + "\n")
+            f.write("  ".join(max_match_segment(line.strip(), dic)) + "\n")
 
