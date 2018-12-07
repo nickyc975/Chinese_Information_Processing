@@ -4,6 +4,9 @@ import pickle
 wordcount={}
 
 if __name__=="__main__":
+    """
+    Usage: python build_dict.py <segmented file> <output file>
+    """
     try:
         fp=open(sys.argv[1], "r", encoding="utf8")
     except:

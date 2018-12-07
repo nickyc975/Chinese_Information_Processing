@@ -37,6 +37,9 @@ def eval_line(output_list, gold_list):
     return correct_word_count
 
 if __name__ == "__main__":
+    """
+    Usage: python eval.py <output file> <gold file>
+    """
     gold_word_count = 0
     output_word_count = 0
     correct_word_count = 0
