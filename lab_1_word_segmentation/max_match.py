@@ -57,7 +57,11 @@ def bi_direction_max_match_segment(line, dic):
         return backward
     else:
         def count_single_char(words):
-            return sum(map(lambda word: 1 if len(word) == 1 else 0, words))
+            count = 0
+            for word in words:
+                if len(word) == 1:
+                    count += 1
+            return count
         return forword if count_single_char(forword) < count_single_char(backward) else backward
 
 
