@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 import sys
 import pickle
-wordcount={}
+wordcount = {}
 
-if __name__=="__main__":
+if __name__ == "__main__":
     """
     Usage: python build_dict.py <segmented file> <output file>
     """
     try:
-        fp=open(sys.argv[1], "r", encoding="utf8")
+        fp = open(sys.argv[1], "r", encoding="utf8")
     except:
         print("Failed to open file", file=sys.stderr)
         sys.exit(1)

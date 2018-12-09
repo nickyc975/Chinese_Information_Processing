@@ -65,7 +65,7 @@ def bi_direction_max_match_segment(line, dic):
         return forword if count_single_char(forword) < count_single_char(backward) else backward
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     """
     Usage: python max_match.py [-forward | -backward | -bi_direction] <file to segment> <dictionary file> <output file>
     """
@@ -81,7 +81,7 @@ if __name__=="__main__":
         sys.exit(1)
 
     try:
-        fpi=open(sys.argv[2], "r", encoding="utf8")
+        fpi = open(sys.argv[2], "r", encoding="utf8")
     except:
         print("failed to open file", file=sys.stderr)
         sys.exit(1)
@@ -95,6 +95,6 @@ if __name__=="__main__":
     with open(sys.argv[4], "w", encoding="utf8") as f:
         start = time.time()
         for line in fpi:
-            f.write("  ".join(max_match_segment(line.strip(), dic)) + "\n")
+            f.write("  ".join(max_match_segment(
+                line.strip().replace(" ", ""), dic)) + "\n")
         print("Finished segmentation in %f seconds." % (time.time() - start))
-
