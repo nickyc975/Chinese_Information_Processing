@@ -24,13 +24,10 @@ def eval_file(input_file, tags):
 
 
 if __name__ == "__main__":
-    with open(sys.argv[1], "r") as input_file:
+    with open(sys.argv[1], "r", encoding="utf16") as input_file:
         taged_cnt, should_tag_cnt, correct_tag_cnt = eval_file(input_file, ("W", "W_B", "W_I", "W_E"))
-        print(
-            "taged_cnt: " + str(taged_cnt) + "\n",
-            "should_tag_cnt: " + str(should_tag_cnt) + "\n",
-            "correct_tag_cnt: " + str(correct_tag_cnt) + "\n",
-            "correctness: " + str(float(correct_tag_cnt) / float(taged_cnt)) + "\n",
-            "recall: " + str(float(correct_tag_cnt) / float(should_tag_cnt)) + "\n"
-        )
-            
+        print(" taged_cnt: " + str(taged_cnt))
+        print(" should_tag_cnt: " + str(should_tag_cnt))
+        print(" correct_tag_cnt: " + str(correct_tag_cnt))
+        print(" correctness: " + str(float(correct_tag_cnt) / float(taged_cnt)))
+        print("recall: " + str(float(correct_tag_cnt) / float(should_tag_cnt)))
