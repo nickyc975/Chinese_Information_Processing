@@ -49,12 +49,16 @@ def pre_process(input_file, training_file, test_file):
 
 
 if __name__ == "__main__":
-    input_file = open(sys.argv[1], "r")
-    training_file = open(sys.argv[2], "w")
-    test_file = open(sys.argv[3], "w")
+    try:
+        input_file = open(sys.argv[1], "r")
+        training_file = open(sys.argv[2], "w")
+        test_file = open(sys.argv[3], "w")
 
-    pre_process(input_file, training_file, test_file)
+        pre_process(input_file, training_file, test_file)
 
-    input_file.close()
-    training_file.close()
-    test_file.close()
+        input_file.close()
+        training_file.close()
+        test_file.close()
+    except:
+        print("Failed to open file!")
+        print("Usage: python pre_process.py <segmented_file> <training_file_output> <testing_file_output>")
