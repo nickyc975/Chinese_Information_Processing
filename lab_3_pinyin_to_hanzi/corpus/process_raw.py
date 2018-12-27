@@ -3,7 +3,7 @@
 import os
 import sys
 
-sys.path = sys.path + [".."]
+sys.path += [".."]
 import pinyin2hanzi.utils as utils
 
 RAW_DIR = "./raw"
