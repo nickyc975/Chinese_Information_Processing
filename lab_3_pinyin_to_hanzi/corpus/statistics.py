@@ -6,7 +6,7 @@ import json
 PWD = os.path.dirname(os.path.abspath(__file__))
 
 SENTENCES_FILE = os.path.join(PWD, "sentences.txt")
-OUTPUT_DIR = os.path.join(PWD, "..", "pinyin2hanzi", "corpus")
+OUTPUT_DIR = os.path.join(PWD, "..", "py2hz", "corpus")
 EMISSION_FILE =  os.path.join(OUTPUT_DIR, "emission.json")
 TRANSITION_FILE =  os.path.join(OUTPUT_DIR, "transition.json")
 INITIAL_PROB_FILE =  os.path.join(OUTPUT_DIR, "initial_prob.json")

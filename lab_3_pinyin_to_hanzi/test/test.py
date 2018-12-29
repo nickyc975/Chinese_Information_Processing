@@ -6,7 +6,7 @@ import pypinyin
 
 PWD = os.path.dirname(os.path.abspath(__file__))
 
-sys.path += [os.path.join(PWD, "..", "pinyin2hanzi")]
+sys.path += [os.path.join(PWD, "..", "py2hz")]
 from py2hz import py2hz
 
 PINYIN_FILE = os.path.join(PWD, "pinyin.txt")
