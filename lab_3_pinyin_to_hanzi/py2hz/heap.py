@@ -2,7 +2,7 @@
 
 import heapq
 
-class LimitedHeap(object):
+class Heap(object):
     def __init__(self, capacity):
         self._container = []
         self._capacity = capacity

@@ -1,34 +1,7 @@
 # coding=utf-8
 
-import json
-from limitedheap import LimitedHeap
-
-
-class HMMParameter(object):
-    def __init__(self, initail_prob_file, emission_file, transtion_file, pinyin2hanzi_file):
-        self._initial_prob = json.load(open(initail_prob_file, "r", encoding="utf8"))
-        self._emission = json.load(open(emission_file, "r", encoding="utf8"))
-        self._transtion = json.load(open(transtion_file, "r", encoding="utf8"))
-        self._pinyin2hanzi = json.load(open(pinyin2hanzi_file, "r", encoding="utf8"))
-
-    def initial_prob(self, hanzi):
-        return self._initial_prob.get(hanzi, float('-inf'))
-
-    def emission(self, hanzi, pinyin):
-        return self._emission.get(hanzi, {}).get(pinyin, float('-inf'))
-
-    def transtion(self, from_hanzi, to_hanzi):
-        return self._transtion.get(from_hanzi, {}).get(to_hanzi, float('-inf'))
-
-    def statesof(self, pinyin):
-        return set(self._pinyin2hanzi.get(pinyin, []))
-
-    def states(self):
-        return set(self._initial_prob.keys())
-
-    def observations(self):
-        return set(self._pinyin2hanzi.keys())
-
+from heap import Heap
+from param import HMMParameter
 
 def viterbi(param, observations, path_num=1):
     assert(isinstance(param, HMMParameter))
@@ -50,7 +23,7 @@ def viterbi(param, observations, path_num=1):
             states[state] = {**states.get(state, {}), (i - len(observations)): max_tuple[1]}
     
     last_states = param.statesof(observations[-1])
-    heap = LimitedHeap(min(path_num, len(last_states)))
+    heap = Heap(min(path_num, len(last_states)))
     for state in last_states:
         heap.push(probs[state][-1], state)
 

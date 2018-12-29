@@ -1,6 +1,9 @@
+# coding=utf-8
+
 import os
 import sys
-from viterbi import HMMParameter, viterbi
+from viterbi import viterbi
+from param import HMMParameter
 
 PWD = os.path.dirname(os.path.abspath(__file__))
 
