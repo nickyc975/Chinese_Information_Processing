@@ -39,7 +39,7 @@ def statistics():
             if output_char == sentence_char:
                 correct += 1
             total += 1
-    print("precision: " + str(float(correct) / float(total)) + "\n")
+    print("precision: " + str(float(correct) / float(total)))
 
 
 if __name__ == "__main__":
