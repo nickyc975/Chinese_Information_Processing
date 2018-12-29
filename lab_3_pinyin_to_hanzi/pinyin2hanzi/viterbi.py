@@ -2,6 +2,7 @@
 
 
 import json
+from limitedheap import LimitedHeap
 
 
 class HMMParameter(object):
@@ -30,7 +31,7 @@ class HMMParameter(object):
         return set(self._pinyin2hanzi.keys())
 
 
-def viterbi(param=HMMParameter, observations=list):
+def viterbi(param, observations, path_num=1):
     assert(isinstance(param, HMMParameter))
 
     probs, states = {}, {}
@@ -49,11 +50,17 @@ def viterbi(param=HMMParameter, observations=list):
             probs[state] = probs.get(state, []) + [max_tuple[0]]
             states[state] = {**states.get(state, {}), (i - len(observations)): max_tuple[1]}
     
-    max_tuple = max([(probs[s][-1], s) for s in param.statesof(observations[-1])])
+    last_states = param.statesof(observations[-1])
+    heap = LimitedHeap(min(path_num, len(last_states)))
+    for state in last_states:
+        heap.push(probs[state][-1], state)
 
-    index = -1
-    result = [max_tuple[1]]
-    while index > -len(observations) and states[result[0]][index] is not None:
-        result.insert(0, states[result[0]][index])
-        index -= 1
-    return result
+    results = []
+    for item in heap:
+        index = -1
+        result = [item[1]]
+        while index > -len(observations) and states[result[0]][index] is not None:
+            result.insert(0, states[result[0]][index])
+            index -= 1
+        results.insert(0, result)
+    return results
