@@ -2,6 +2,7 @@
 
 import os
 import json
+from math import log10 as log
 
 PWD = os.path.dirname(os.path.abspath(__file__))
 
@@ -62,20 +63,20 @@ def statistics():
 
     total_char = sum(initial_prob.values())
     for key, value in initial_prob.items():
-        initial_prob[key] = float(value) / total_char
+        initial_prob[key] = log(float(value) / total_char)
     json.dump(initial_prob, open(INITIAL_PROB_FILE, "w", encoding="utf8"))
 
     for key, value in emssion.items():
         total_pinyin = sum(value.values())
         for k, v in value.items():
-            value[k] = float(v) / total_pinyin
+            value[k] = log(float(v) / total_pinyin)
         emssion[key] = value
     json.dump(emssion, open(EMISSION_FILE, "w", encoding="utf8"))
 
     for key, value in transition.items():
         total_trans = sum(value.values())
         for k, v in value.items():
-            value[k] = float(v) / total_trans
+            value[k] = log(float(v) / total_trans)
         transition[key] = value
     json.dump(transition, open(TRANSITION_FILE, "w", encoding="utf8"))
 

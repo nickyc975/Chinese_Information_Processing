@@ -1,6 +1,5 @@
 # coding=utf-8
 
-
 import json
 from limitedheap import LimitedHeap
 
@@ -13,13 +12,13 @@ class HMMParameter(object):
         self._pinyin2hanzi = json.load(open(pinyin2hanzi_file, "r", encoding="utf8"))
 
     def initial_prob(self, hanzi):
-        return self._initial_prob.get(hanzi, 0)
+        return self._initial_prob.get(hanzi, float('-inf'))
 
     def emission(self, hanzi, pinyin):
-        return self._emission.get(hanzi, {}).get(pinyin, 0)
+        return self._emission.get(hanzi, {}).get(pinyin, float('-inf'))
 
     def transtion(self, from_hanzi, to_hanzi):
-        return self._transtion.get(from_hanzi, {}).get(to_hanzi, 0)
+        return self._transtion.get(from_hanzi, {}).get(to_hanzi, float('-inf'))
 
     def statesof(self, pinyin):
         return set(self._pinyin2hanzi.get(pinyin, []))
@@ -36,14 +35,14 @@ def viterbi(param, observations, path_num=1):
 
     probs, states = {}, {}
     for state in param.statesof(observations[0]):
-        probs[state] = [param.initial_prob(state) * param.emission(state, observations[0])]
+        probs[state] = [param.initial_prob(state) + param.emission(state, observations[0])]
         states[state] = {-len(observations): None}
 
     for i in range(1, len(observations)):
         for state in param.statesof(observations[i]):
             max_tuple = max(
                                 [
-                                    (probs[s][-1] * param.transtion(s, state) * param.emission(state, observations[i]), s) 
+                                    (probs[s][-1] + param.transtion(s, state) + param.emission(state, observations[i]), s) 
                                     for s in param.statesof(observations[i - 1])
                                 ]
                             )
