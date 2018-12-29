@@ -1,20 +1,16 @@
 # coding=utf-8
 
 import os
-import sys
 import json
-import pypinyin
 
-sys.path += [".."]
-import pinyin2hanzi.utils as utils
+PWD = os.path.dirname(os.path.abspath(__file__))
 
-PROCESSED_SENTENCES_FILE = "./processed_sentences.txt"
-
-OUTPUT_DIR = "../pinyin2hanzi/corpus/"
-EMISSION_FILE = OUTPUT_DIR + "emission.json"
-TRANSITION_FILE = OUTPUT_DIR + "transition.json"
-INITIAL_PROB_FILE = OUTPUT_DIR + "initial_prob.json"
-PINYIN2HANZI_FILE = OUTPUT_DIR + "pinyin2hanzi.json"
+SENTENCES_FILE = os.path.join(PWD, "sentences.txt")
+OUTPUT_DIR = os.path.join(PWD, "..", "pinyin2hanzi", "corpus")
+EMISSION_FILE =  os.path.join(OUTPUT_DIR, "emission.json")
+TRANSITION_FILE =  os.path.join(OUTPUT_DIR, "transition.json")
+INITIAL_PROB_FILE =  os.path.join(OUTPUT_DIR, "initial_prob.json")
+PINYIN2HANZI_FILE =  os.path.join(OUTPUT_DIR, "pinyin2hanzi.json")
 
 
 def load_sentences(file_path):
@@ -27,12 +23,12 @@ def load_sentences(file_path):
     return sentences
 
 
-def process_sentences():
+def statistics():
     emssion = {}
     transition = {}
     initial_prob = {}
     pinyin2hanzi = {}
-    sentences = load_sentences(PROCESSED_SENTENCES_FILE)
+    sentences = load_sentences(SENTENCES_FILE)
     for sentence in sentences:
         for hanzi, pinyin in sentence:
             if hanzi in emssion.keys():
@@ -89,4 +85,4 @@ def process_sentences():
 
 
 if __name__ == "__main__":
-    process_sentences()
+    statistics()

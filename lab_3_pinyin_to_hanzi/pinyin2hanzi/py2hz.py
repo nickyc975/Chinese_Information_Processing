@@ -1,9 +1,13 @@
+import os
 from viterbi import HMMParameter, viterbi
 
-INITIAL_PROB_FILE = "./corpus/initial_prob.json"
-EMISSION_FILE = "./corpus/emission.json"
-TRANSITION_FILE = "./corpus/transition.json"
-PINYIN2HANZI_FILE = "./corpus/pinyin2hanzi.json"
+PWD = os.path.dirname(os.path.abspath(__file__))
+
+CORPUS_DIR = os.path.join(PWD, "corpus")
+INITIAL_PROB_FILE = os.path.join(CORPUS_DIR, "initial_prob.json")
+EMISSION_FILE = os.path.join(CORPUS_DIR, "emission.json")
+TRANSITION_FILE = os.path.join(CORPUS_DIR, "transition.json")
+PINYIN2HANZI_FILE = os.path.join(CORPUS_DIR, "pinyin2hanzi.json")
 
 param = HMMParameter(INITIAL_PROB_FILE, EMISSION_FILE, TRANSITION_FILE, PINYIN2HANZI_FILE)
 
