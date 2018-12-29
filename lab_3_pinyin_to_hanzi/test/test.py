@@ -16,7 +16,7 @@ def test():
     sentences = []
     with open(PINYIN_FILE, "r", encoding="utf8") as pinyin_file:
         for line in pinyin_file.readlines():
-            sentences.append(py2hz(line.split()))
+            sentences.append("\n".join(py2hz(line.split())))
 
     with open(OUTPUT_FILE, "w", encoding="utf8") as output_file:
         output_file.write("\n".join(sentences) + "\n")

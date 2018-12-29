@@ -16,18 +16,15 @@ def py2hz(pinyin, path_num=1):
     assert(path_num > 0)
     assert(isinstance(pinyin, (list, set, tuple)))
 
-    output = []
     results = viterbi(param, pinyin, path_num)
-    for result in results:
-        output.append("".join(result))
-    return "\n".join(output)
+    return ["".join(result) for result in results]
 
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
-        print(py2hz(sys.argv[1].split()))
+        print("\n".join(py2hz(sys.argv[1].split())))
     elif len(sys.argv) == 3:
-        print(py2hz(sys.argv[1].split(), int(sys.argv[2])))
+        print("\n".join(py2hz(sys.argv[1].split(), int(sys.argv[2]))))
     else:
         print(
             "Usage: python py2hz.py <pinyin> [path num]\n" +
