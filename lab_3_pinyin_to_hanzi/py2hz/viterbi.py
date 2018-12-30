@@ -28,7 +28,7 @@ def viterbi(param, observations, path_num=1):
         heap.push(probs[state][-1], state)
 
     results = []
-    for item in heap:
+    for item in sorted(heap):
         index = -1
         result = [item[1]]
         while index > -len(observations) and states[result[0]][index] is not None:
